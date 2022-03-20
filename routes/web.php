@@ -3,6 +3,7 @@
 use App\Http\Controllers\CreateUserController;
 use App\Http\Controllers\EditUserController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,9 +14,7 @@ use Illuminate\Support\Facades\Auth;
 //    dd();
 //});
 
-//Auth::routes();
-
-//Route::middleware('auth')->group(function(){
+Route::middleware('auth')->group(function(){
     Route::get('/', [PageController::class, 'index']);
     Route::get('/users', [PageController::class, 'index']);
     Route::get('/page_profile{id}', [PageController::class, 'page_profile']);
@@ -31,16 +30,12 @@ use Illuminate\Support\Facades\Auth;
     Route::post('/editUserSecurity{id}', [EditUserController::class, 'editUserSecurity']);
     Route::post('/editUserStatus{id}', [EditUserController::class, 'editUserStatus']);
 
-    Route::get('/logout', 'UserController@logout');
-//});
+    Route::get('/logout', [UserController::class, 'logout']);
+});
 
-//Route::middleware(['auth', 'admin'])->group(function() {
+Route::middleware(['auth', 'admin'])->group(function() {
     Route::get('/create_user', [CreateUserController::class, 'create_user']);
     Route::post('/storeUser', [CreateUserController::class, 'storeUser']);
-//});
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+});
 
 require __DIR__.'/auth.php';

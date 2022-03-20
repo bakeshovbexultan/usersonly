@@ -4,7 +4,11 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Routing\Redirector;
+use Symfony\Component\Console\Input\Input;
 
 class Helper {
 
@@ -35,7 +39,7 @@ class Helper {
     public function userAdminOrSelfprofile($id) {
         if (!(Auth::user()->role == 'admin')) {
             if (!(Auth::id() == $id)) {
-                return redirect('users')->with('status-danger', 'Можно редактировать только свой профиль');
+                redirect('/users')->send()->with('status-danger', 'Можно редактировать только свой профиль');
             }
         }
     }

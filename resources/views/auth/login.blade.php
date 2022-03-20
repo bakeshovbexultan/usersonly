@@ -69,8 +69,8 @@
     </div>
 </div>
 <video poster="img/backgrounds/clouds.png" id="bgvid" playsinline autoplay muted loop>
-    <source src="media2/video/cc.webm" type="video/webm">
-    <source src="media2/video/cc.mp4" type="video/mp4">
+    <source src="media_video/video/cc.webm" type="video/webm">
+    <source src="media_video/video/cc.mp4" type="video/mp4">
 </video>
 <script src="js/vendors.bundle.js"></script>
 </body>

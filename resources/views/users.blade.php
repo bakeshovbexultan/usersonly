@@ -19,9 +19,9 @@
         </div>
         <div class="row">
             <div class="col-xl-12">
-{{--                @if(Auth::user()->role == 'admin')--}}
+                @if(Auth::user()->role == 'admin')
                     <a class="btn btn-success" href="/create_user">Добавить</a>
-{{--                @endif--}}
+                @endif
                 <div class="border-faded bg-faded p-3 mb-g d-flex mt-3">
                     <input type="text" id="js-filter-contacts" name="filter-contacts"
                            class="form-control shadow-inset-2 form-control-lg" placeholder="Найти пользователя">
@@ -49,7 +49,7 @@
                                           style="background-image:url({{$user->avatar}}); background-size: cover;"></span>
                                 </span>
                                 <div class="info-card-text flex-1">
-{{--                                    @if(Auth::user()->role == 'admin' || Auth::id() == $user->id)--}}
+                                    @if(Auth::user()->role == 'admin' || Auth::id() == $user->id)
 
                                     <a href="javascript:void(0);" class="fs-xl text-truncate text-truncate-lg text-info"
                                        data-toggle="dropdown" aria-expanded="false">
@@ -77,9 +77,9 @@
                                         </a>
                                     </div>
 
-{{--                                    @else--}}
-{{--                                        {{$user->username}}--}}
-{{--                                    @endif--}}
+                                    @else
+                                        {{$user->username}}
+                                    @endif
 
                                     <span
                                         class="text-truncate text-truncate-xl">{{$user->profession}}</span>
