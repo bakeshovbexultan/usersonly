@@ -75,10 +75,15 @@
                                 <!-- status -->
                                 <div class="form-group">
                                     <label class="form-label" for="example-select">Выберите статус</label>
-                                    <select name="status" class="form-control" id="example-select">
-                                        <option>Online</option>
-                                        <option>Get away</option>
-                                        <option>Don't disturb</option>
+                                    <select name="status_id" class="form-control" id="example-select">
+                                        @foreach($statuses as $status)
+                                            <option value="{{$status->id}}">{{$status->status_condition}}</option>
+                                        @endforeach
+
+
+{{--                                        <option>Online</option>--}}
+{{--                                        <option>Get away</option>--}}
+{{--                                        <option>Don't disturb</option>--}}
                                     </select>
                                 </div>
 

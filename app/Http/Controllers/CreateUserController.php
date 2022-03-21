@@ -16,7 +16,8 @@ class CreateUserController extends Controller
 
     function create_user() {
         $this->helper->redirectIfNotAdmin();
-        return view('create_user');
+        $statuses = $this->helper->getAllStatuses();
+        return view('create_user', ['statuses' => $statuses]);
     }
 
     function storeUser(Request $request) {
@@ -33,7 +34,7 @@ class CreateUserController extends Controller
             'phone_number' => $_POST['phone_number'],
             'address' => $_POST['address'],
             'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
-            'status' => $_POST['status'],
+            'status_id' => $_POST['status_id'],
             'vkontakte' => $_POST['vkontakte'],
             'telegram' => $_POST['telegram'],
             'instagram' => $_POST['instagram'],
