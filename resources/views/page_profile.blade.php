@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.layout')
 
 @section('content')
     <main id="js-page-content" role="main" class="page-content mt-3">

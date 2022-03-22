@@ -4,19 +4,23 @@ use App\Http\Controllers\CreateUserController;
 use App\Http\Controllers\EditUserController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
+use App\Models\Status;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 Route::get('test', function () {
-    $user = User::factory()->create();
-    dd($user);
+    $status = Status::find(3);
+    $user = User::find(8);
+    dd($user->status->id);
+    $users = User::where('status_id', $status->id)->get();
+    dd($users);
 });
 
-Route::middleware('auth')->group(function(){
-    Route::controller(PageController::class)->group(function() {
+Route::middleware('auth')->group(function () {
+    Route::controller(PageController::class)->group(function () {
         Route::get('/', 'index');
         Route::get('/users', 'index');
         Route::get('/page_profile{id}', 'page_profile');
@@ -26,8 +30,8 @@ Route::middleware('auth')->group(function(){
         Route::get('/edit{id}', 'edit');
     });
 
-    Route::controller(EditUserController::class)->group(function() {
-        Route::get('/delete{id}', 'delete');
+    Route::controller(EditUserController::class)->group(function () {
+        Route::get('/delete/{id}', 'delete');
         Route::post('/updateAvatar{id}', 'updateAvatar');
         Route::post('/store', 'store');
         Route::post('/editUserData{id}', 'editUserData');
@@ -39,14 +43,13 @@ Route::middleware('auth')->group(function(){
 });
 
 
-
-Route::middleware(['auth', 'admin'])->group(function() {
-    Route::controller(CreateUserController::class)->group(function() {
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::controller(CreateUserController::class)->group(function () {
         Route::get('/create_user', 'create_user');
         Route::post('/storeUser', 'storeUser');
     });
 
-    Route::get('/fakeusers', function() {
+    Route::get('/fakeusers', function () {
         factory(App\User::class, 25)->create();
     });
 });

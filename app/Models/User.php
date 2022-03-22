@@ -42,6 +42,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function status() {
+        return $this->belongsTo(Status::class, 'status_id', 'id');
+    }
+
     public static function register($data) {
         $user = new self;
         $user->password = $data['password'];

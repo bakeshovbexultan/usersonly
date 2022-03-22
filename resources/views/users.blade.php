@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.layout')
 
 @section('content')
     <main id="js-page-content" role="main" class="page-content mt-3">
@@ -71,7 +71,7 @@
                                             <i class="fa fa-camera"></i>
                                             Загрузить аватар
                                         </a>
-                                        <a href="/delete{{$user->id}}" class="dropdown-item" onclick="return confirm('Are you sure?');">
+                                        <a href="/delete/{{$user->id}}" class="dropdown-item" onclick="return confirm('Are you sure?');">
                                             <i class="fa fa-window-close"></i>
                                             Удалить
                                         </a>
