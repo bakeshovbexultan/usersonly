@@ -52,7 +52,9 @@ class Helper {
     }
 
     public function deleteUser($editUser) {
-        Storage::delete($editUser->avatar);
+        if (!empty($editUser->avatar)) {
+            Storage::delete($editUser->avatar);
+        }
         DB::table('users')->where('id', $editUser->id)->delete();
     }
 

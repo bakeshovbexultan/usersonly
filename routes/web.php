@@ -4,12 +4,16 @@ use App\Http\Controllers\CreateUserController;
 use App\Http\Controllers\EditUserController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 
 require __DIR__.'/auth.php';
 
-
+Route::get('test', function () {
+    $user = User::factory()->create();
+    dd($user);
+});
 
 Route::middleware('auth')->group(function(){
     Route::controller(PageController::class)->group(function() {

@@ -12,7 +12,6 @@
     <link rel="stylesheet" media="screen, print" href="css/fa-solid.css">
     <link rel="stylesheet" media="screen, print" href="css/fa-brands.css">
     <link rel="stylesheet" media="screen, print" href="css/fa-regular.css">
-    <link rel="icon" href="uploads/download.png" type="image/x-icon">
 </head>
 
 <body class="mod-bg-1 mod-nav-link">
