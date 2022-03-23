@@ -30,20 +30,29 @@
                                 <!-- email -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Email</label>
-                                    <input name="email" type="text" id="simpleinput" class="form-control" value="{{$editUser->email}}">
+                                    <input name="email" type="text" id="simpleinput" class="form-control @error('email') is-invalid @enderror" value="{{$editUser->email}}">
                                 </div>
+                                @error('email')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
 
                                 <!-- password -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Пароль</label>
-                                    <input name="password" type="password" id="simpleinput" class="form-control">
+                                    <input name="password" type="password" id="simpleinput" class="form-control @error('password') is-invalid @enderror">
                                 </div>
+                                @error('password')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
 
                                 <!-- password confirmation-->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Подтверждение пароля</label>
-                                    <input type="password" id="simpleinput" class="form-control">
+                                    <input type="password" id="simpleinput" class="form-control @error('password') is-invalid @enderror">
                                 </div>
+                                @error('password')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
 
 
                                 <div class="col-md-12 mt-3 d-flex flex-row-reverse">

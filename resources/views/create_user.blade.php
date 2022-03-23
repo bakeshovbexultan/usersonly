@@ -27,26 +27,38 @@
                                 <!-- username -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Имя</label>
-                                    <input name="username" type="text" id="simpleinput" class="form-control">
+                                    <input value="{{old('username')}}" name="username" type="text" id="simpleinput" class="form-control">
                                 </div>
+                                @error('username')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
 
-                                <!-- title -->
+                            <!-- profession -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Место работы</label>
-                                    <input name="profession" type="text" id="simpleinput" class="form-control">
+                                    <input value="{{old('profession')}}" name="profession" type="text" id="simpleinput" class="form-control">
                                 </div>
+                                @error('profession')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
 
-                                <!-- tel -->
+                            <!-- phone_number -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Номер телефона</label>
-                                    <input name="phone_number" type="text" id="simpleinput" class="form-control">
+                                    <input value="{{old('phone_number')}}"  name="phone_number" type="text" id="simpleinput" class="form-control">
                                 </div>
+                                @error('phone_number')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
 
-                                <!-- address -->
+                            <!-- address -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Адрес</label>
-                                    <input name="address" type="text" id="simpleinput" class="form-control">
+                                    <input value="{{old('address')}}"  name="address" type="text" id="simpleinput" class="form-control">
                                 </div>
+                                @error('address')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
 
@@ -62,30 +74,34 @@
                                 <!-- email -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Email</label>
-                                    <input name="email" type="text" id="simpleinput" class="form-control">
+                                    <input value="{{old('email')}}"  name="email" type="text" id="simpleinput" class="form-control">
                                 </div>
+                                @error('email')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
 
                                 <!-- password -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Пароль</label>
                                     <input name="password" type="password" id="simpleinput" class="form-control">
                                 </div>
+                                @error('password')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
 
 
-                                <!-- status -->
+                            <!-- status -->
                                 <div class="form-group">
                                     <label class="form-label" for="example-select">Выберите статус</label>
                                     <select name="status_id" class="form-control" id="example-select">
                                         @foreach($statuses as $status)
                                             <option value="{{$status->id}}">{{$status->status_condition}}</option>
                                         @endforeach
-
-
-{{--                                        <option>Online</option>--}}
-{{--                                        <option>Get away</option>--}}
-{{--                                        <option>Don't disturb</option>--}}
                                     </select>
                                 </div>
+                                @error('status')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
 
                                 <div class="form-group">
                                     <label class="form-label" for="example-fileinput">Загрузить аватар</label>
@@ -116,8 +132,12 @@
                                                     </span>
                                                 </span>
                                             </div>
-                                            <input name="vkontakte" type="text" class="form-control border-left-0 bg-transparent pl-0">
+                                            <input name="vkontakte" type="text"
+                                                   class="form-control border-left-0 bg-transparent pl-0">
                                         </div>
+                                        @error('vkontakte')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="col-md-4">
                                         <!-- telegram -->
@@ -130,8 +150,12 @@
                                                     </span>
                                                 </span>
                                             </div>
-                                            <input name="telegram" type="text" class="form-control border-left-0 bg-transparent pl-0">
+                                            <input name="telegram" type="text"
+                                                   class="form-control border-left-0 bg-transparent pl-0">
                                         </div>
+                                        @error('telegram')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="col-md-4">
                                         <!-- instagram -->
@@ -144,8 +168,12 @@
                                                     </span>
                                                 </span>
                                             </div>
-                                            <input name="instagram" type="text" class="form-control border-left-0 bg-transparent pl-0">
+                                            <input name="instagram" type="text"
+                                                   class="form-control border-left-0 bg-transparent pl-0">
                                         </div>
+                                        @error('instagram')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="col-md-12 mt-3 d-flex flex-row-reverse">
                                         <button class="btn btn-success">Добавить</button>

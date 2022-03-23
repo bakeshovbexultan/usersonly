@@ -28,6 +28,9 @@
                                 </div>
 
                                 <div class="form-group">
+                                    @error('avatar')
+                                    <div class="alert alert-danger">{{$message}}</div>
+                                    @enderror
                                     <label class="form-label" for="example-fileinput">Выберите аватар</label>
                                     <input name="avatar" type="file" id="example-fileinput" class="form-control-file">
                                 </div>

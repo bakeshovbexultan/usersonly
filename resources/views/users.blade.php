@@ -41,7 +41,7 @@
         <div class="row" id="js-contacts">
             @foreach($users as $user)
                 <div class="col-xl-4">
-                    <div id="c_2" class="card border shadow-0 mb-g shadow-sm-hover" data-filter-tags="alita gray">
+                    <div id="c_2" class="card border shadow-0 mb-g shadow-sm-hover" data-filter-tags="{{$user->username}}}">
                         <div class="card-body border-faded border-top-0 border-left-0 border-right-0 rounded-top">
                             <div class="d-flex flex-row align-items-center">
                                 <span class="status status-warning mr-3">
@@ -126,12 +126,12 @@
 @section('footer')
     <footer class="page-footer" role="contentinfo">
         <div class="d-flex align-items-center flex-1 text-muted">
-            <span class="hidden-md-down fw-700">2020 © Учебный проект</span>
+            <span class="hidden-md-down fw-700">2022 © Учебный проект</span>
         </div>
         <div>
             <ul class="list-table m-0">
-                <li><a href="intel_introduction.html" class="text-secondary fw-700">Home</a></li>
-                <li class="pl-3"><a href="info_app_licensing.html" class="text-secondary fw-700">About</a></li>
+                <li><a href="#" class="text-secondary fw-700">Home</a></li>
+                <li class="pl-3"><a href="#" class="text-secondary fw-700">About</a></li>
             </ul>
         </div>
     </footer>
