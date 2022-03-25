@@ -19,7 +19,7 @@ Route::get('test', function () {
     dd($users);
 });
 
-Route::middleware('auth')->group(function () {
+//Route::middleware('auth')->group(function () {
     Route::controller(PageController::class)->group(function () {
         Route::get('/', 'index');
         Route::get('/users', 'index');
@@ -40,7 +40,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::get('/logout', [UserController::class, 'logout']);
-});
+//});
 
 
 Route::middleware(['auth', 'admin'])->group(function () {
