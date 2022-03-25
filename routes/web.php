@@ -1,17 +1,20 @@
 <?php
 
-use App\Http\Controllers\CreateUserController;
-use App\Http\Controllers\EditUserController;
 use App\Http\Controllers\PageController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\User\CreateUserController;
+use App\Http\Controllers\User\EditUserController;
+use App\Http\Controllers\User\UserController;
 use App\Models\Status;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 
 require __DIR__ . '/auth.php';
 
 Route::get('test', function () {
+
+    dd();
     $status = Status::find(3);
     $user = User::find(8);
     dd($user->status->id);

@@ -33,7 +33,8 @@ class Helper {
     }
 
     public function getUserById($id) {
-        return DB::table('users')->select('*')->where('id', $id)->first();
+        $user = DB::table('users')->select('*')->where('id', $id)->first();
+        return $user;
     }
 
     public function userAdminOrSelfprofile($id) {

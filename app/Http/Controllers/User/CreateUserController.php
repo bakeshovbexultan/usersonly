@@ -1,20 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\User\BaseController;
+use App\Http\Controllers\Controller;
 use App\Services\Helper;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules;
+use function redirect;
+use function view;
 
-class CreateUserController extends Controller
+class CreateUserController extends BaseController
 {
-    private $helper;
-
-    public function __construct() {
-        $this->helper = new Helper;
-    }
-
     function create_user() {
         $this->helper->redirectIfNotAdmin();
         $statuses = $this->helper->getAllStatuses();

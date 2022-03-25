@@ -14,6 +14,7 @@ use Laravel\Dusk\Browser;
 
 class ExampleTest extends TestCase
 {
+//    use RefreshDatabase;
     /**
      * TODO: Как документировать и нужно ли документировать тестирование
      */
@@ -74,14 +75,17 @@ class ExampleTest extends TestCase
 
     /**
      * Создать пользователя в методе, отправить его на страницу users и проверить показывается ли он там
-     * TODO: Создать пользователя с конкретными данными, и эти самые данные подтвердить
+     * TODO: Создать пользователя с конкретными данными, и эти самые данные подтвердить. Использовать factory
      * @return void
      */
 
     public function test_a_users_view_can_be_render_user_data()
     {
-        $users = '';
 
+//        $this->assertTrue(true);
+//        $users = ;
+
+        $users = User::paginate(9);
         $view = $this->view('users', ['users' => $users]);
 
         $view->assertSee('Список пользователей');
@@ -92,6 +96,18 @@ class ExampleTest extends TestCase
      * Работает ли пагинация
      * TODO: Создать пользователей больше 9, чтобы появилась пагинация. Отправить на страницу users
      */
+
+    /*public function test_a_users_view_can_be_render_user_data()
+    {
+
+//        $this->assertTrue(true);
+//        $users = ;
+
+        $users = User::paginate(9);
+        $view = $this->view('users', ['users' => $users]);
+
+        $view->assertSee('Список пользователей');
+    }*/
 
 
     /**

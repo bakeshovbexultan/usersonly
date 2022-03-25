@@ -1,22 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\User\BaseController;
+use App\Http\Controllers\Controller;
 use App\Services\Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules;
+use function redirect;
 
-class EditUserController extends Controller
+class EditUserController extends BaseController
 {
-    private $helper;
-
-    public function __construct()
-    {
-        $this->helper = new Helper;
-    }
-
     function updateAvatar(Request $request, $id)
     {
         $request->validate([
