@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Status;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -26,7 +27,10 @@ class UserFactory extends Factory
             'profession' => $this->faker->jobTitle(),
             'phone_number' => $this->faker->phoneNumber(),
             'address' => $this->faker->address(),
-        ];
+            'avatar' => $this->faker->imageUrl(),
+            'status_id' => 1,
+//            'status_id' => Status::get()->random()->id,
+            ];
     }
 
     /**

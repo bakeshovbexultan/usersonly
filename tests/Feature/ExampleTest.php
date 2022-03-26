@@ -4,91 +4,110 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Chrome;
 use Tests\DuskTestCase;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Dusk\Browser;
+use App\Models\Status;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
 
 class ExampleTest extends TestCase
 {
-//    use RefreshDatabase;
+    use RefreshDatabase;
     /**
      * TODO: Как документировать и нужно ли документировать тестирование
      */
 
     public function test_the_application_returns_a_successful_response()
     {
-
-        /*$user = User::factory()->create();
-        dd($user);
-        $response = $this->get('/');
-
-        $response->assertStatus(200);*/
         $this->assertTrue(true);
-        $response = $this->get('/');
 
-//        $response->ddHeaders();
-
-//        $response->ddSession();
-
-//        $response->dd();
+//        $user = User::factory()->create();
+//        $response = $this->get('/');
+//        $response->assertStatus(200);
+//        $response = $this->get('/');
     }
-
-    /*public function test_avatars_can_be_uploaded()
-    {
-        Storage::fake('avatars');
-
-        $file = UploadedFile::fake()->image('avatar.jpg');
-
-        $response = $this->post('/avatar', [
-            'avatar' => $file,
-        ]);
-
-        Storage::disk('avatars')->assertExists($file->hashName());
-    }*/
-
-    /**
-     * Работает ли рендер страницы users
-     * TODO: Сделать чтобы пользователь логинился, чтобы проходить проверку
-     * @return void
-     */
+    
     public function test_a_users_view_can_be_rendered()
     {
-//        $this->get('/login');
-//        $this->browse(function ($browser) {
-//            $browser->loginAs(User::find(6))->visit('/users');
+        User::factory(20)->create();
+        $users = User::paginate(9);
+        $user = $users->first();
+        Auth::loginUsingId($user->id);
+
+        $view = $this->view('users', ['users' => $users]);
+
+        $view->assertSee('Учебный проект');
+        $view->assertSee('Войти');
+        $view->assertSee('Список пользователей');
+        $view->assertSee('Home');
+        $view->assertSee('2022 © Учебный проект');
+    }
+
+    /**
+     * Рендер страницы users
+     * Проверить работает ли кнопка "Добавить" нового пользователя, если данный пользователь админ,
+     * если не админ то не показывается ли
+     */
+
+    public function test_admin_has_add_user_button()
+    {
+        User::factory(1)->create([
+            'id' => 1,
+            'username' => 'John Vance',
+            'email' => 'johnvance@example.com',
+            'profession' => 'Doctor',
+            'phone_number' => '+1 (970) 357-9097',
+            'address' => '431 Eveline Trail Apt. 085 Tessside, RI 16481-3261',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', //password
+            'role' => 'admin',
+        ]);
+
+        Auth::loginUsingId(1);
+//        browse(function ($browser) {
+//            $browser->loginAs(User::find(1))
+//                ->visit('/home');
 //        });
 
         $users = User::paginate(9);
 
         $view = $this->view('users', ['users' => $users]);
 
-        $view->assertSee('Список пользователей');
-        $view->assertSee('Home');
-        $view->assertSee('About');
-        $view->assertSee('2022 © Учебный проект');
-        $view->assertSee('Выйти');
+        $view->assertSee('Учебный проект');
     }
-
     /**
-     * Создать пользователя в методе, отправить его на страницу users и проверить показывается ли он там
-     * TODO: Создать пользователя с конкретными данными, и эти самые данные подтвердить. Использовать factory
-     * @return void
+     * Создать пользователя в методе, отправить его на страницу users и проверить
+     * показывается ли он там
      */
 
-    public function test_a_users_view_can_be_render_user_data()
+    public function test_a_users_view_can_show_user_data()
     {
-
-//        $this->assertTrue(true);
-//        $users = ;
+        User::factory(1)->create([
+            'id' => 1,
+            'username' => 'John Vance',
+            'email' => 'johnvance@example.com',
+            'profession' => 'Doctor',
+            'phone_number' => '+1 (970) 357-9097',
+            'address' => '431 Eveline Trail Apt. 085 Tessside, RI 16481-3261',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', //password
+            'role' => 'user'
+        ]);
+        Auth::loginUsingId(1);
 
         $users = User::paginate(9);
         $view = $this->view('users', ['users' => $users]);
 
         $view->assertSee('Список пользователей');
+        $view->assertSee('John Vance');
+        $view->assertSee('johnvance@example.com');
+        $view->assertSee('Doctor');
+        $view->assertSee('+1 (970) 357-9097');
+        $view->assertSee('431 Eveline Trail Apt. 085 Tessside, RI 16481-3261');
     }
 
     /**
@@ -97,24 +116,21 @@ class ExampleTest extends TestCase
      * TODO: Создать пользователей больше 9, чтобы появилась пагинация. Отправить на страницу users
      */
 
-    /*public function test_a_users_view_can_be_render_user_data()
+    public function test_a_users_view_can_be_render_user_data()
     {
-
-//        $this->assertTrue(true);
-//        $users = ;
+        User::factory(20)->create();
 
         $users = User::paginate(9);
+
+        $user = $users->first();
+        Auth::loginUsingId($user->id);
+
         $view = $this->view('users', ['users' => $users]);
 
         $view->assertSee('Список пользователей');
-    }*/
+    }
 
 
-    /**
-     * Рендер страницы users
-     * Проверить работает ли кнопка "Добавить" нового пользователя, если данный пользователь админ,
-     * если не админ то не показывается ли
-     */
 
     /**
      * Рендер страницы create_user
@@ -134,11 +150,35 @@ class ExampleTest extends TestCase
      * Рендер страницы edit
      * Если id не передан на страницу, то нужно вернуться на главную страницу и вывезти флеш сообщение
      * Введен ли уже мои данные в строках
+     *
+     * Под вопросом нижние утверждения
      * Переходит ли на страницу профиля, если нажата кнопка редактирования
      * Выводится ли флеш сообщение об успешном изменений если данные изменены, если нет, то сообщение не должно
      * выводиться
      *
      */
+
+    public function test_a_edit_view_can_be_rendered()
+    {
+        $user = User::factory(1)->create([
+            'id' => 1,
+            'username' => 'John Vance',
+            'email' => 'johnvance@example.com',
+            'profession' => 'Doctor',
+            'phone_number' => '+1 (970) 357-9097',
+            'address' => '431 Eveline Trail Apt. 085 Tessside, RI 16481-3261',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', //password
+            'role' => 'user'
+        ])->first();
+//        Auth::loginUsingId(1);
+        $view = $this->view('edit', ['editUser' => $user]);
+        $view->assertSee('Учебный проект');
+        $view->assertSee('Редактировать');
+        $view->assertSee('John Vance');
+        $view->assertSee('Doctor');
+        $view->assertSee('+1 (970) 357-9097');
+        $view->assertSee('431 Eveline Trail Apt. 085 Tessside, RI 16481-3261');
+    }
 
     /**
      * Рендер страницы page_profile
@@ -168,6 +208,19 @@ class ExampleTest extends TestCase
      * Проверить работает ли загрузка аватара. Проверить не принимает ли другие расширения кроме фотографий
      */
 
+
+    /*public function test_avatars_can_be_uploaded()
+    {
+        Storage::fake('avatars');
+
+        $file = UploadedFile::fake()->image('avatar.jpg');
+
+        $response = $this->post('/avatar', [
+            'avatar' => $file,
+        ]);
+
+        Storage::disk('avatars')->assertExists($file->hashName());
+    }*/
     /**
      * Удаление
      */

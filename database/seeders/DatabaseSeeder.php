@@ -16,9 +16,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        //$users = User::factory(20)->make();
-        Status::factory(1)->create();
+        Status::factory(1)->create(['status_condition' => 'Offline']);
+        Status::factory(1)->create(['status_condition' => 'Online']);
+        Status::factory(1)->create(['status_condition' => 'Away']);
         User::factory(20)->create();
-        //        \App\Models\User::factory(20)->create();
     }
 }
