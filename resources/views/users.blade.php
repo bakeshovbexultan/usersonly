@@ -41,7 +41,8 @@
         <div class="row" id="js-contacts">
             @foreach($users as $user)
                 <div class="col-xl-4">
-                    <div id="c_2" class="card border shadow-0 mb-g shadow-sm-hover" data-filter-tags="{{$user->username}}}">
+                    <div id="c_2" class="card border shadow-0 mb-g shadow-sm-hover"
+                         data-filter-tags="{{$user->username}}}">
                         <div class="card-body border-faded border-top-0 border-left-0 border-right-0 rounded-top">
                             <div class="d-flex flex-row align-items-center">
                                 <span class="status status-warning mr-3">
@@ -51,31 +52,33 @@
                                 <div class="info-card-text flex-1">
                                     @if(Auth::user()->role == 'admin' || Auth::id() == $user->id)
 
-                                    <a href="javascript:void(0);" class="fs-xl text-truncate text-truncate-lg text-info"
-                                       data-toggle="dropdown" aria-expanded="false">
-                                        {{$user->username}}
-                                        <i class="fal fas fa-cog fa-fw d-inline-block ml-1 fs-md"></i>
-                                        <i class="fal fa-angle-down d-inline-block ml-1 fs-md"></i>
-                                    </a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="/edit{{$user->id}}">
-                                            <i class="fa fa-edit"></i>
-                                            Редактировать</a>
-                                        <a class="dropdown-item" href="/security{{$user->id}}">
-                                            <i class="fa fa-lock"></i>
-                                            Безопасность</a>
-                                        <a class="dropdown-item" href="/status{{$user->id}}">
-                                            <i class="fa fa-sun"></i>
-                                            Установить статус</a>
-                                        <a class="dropdown-item" href="/media{{$user->id}}">
-                                            <i class="fa fa-camera"></i>
-                                            Загрузить аватар
+                                        <a href="javascript:void(0);"
+                                           class="fs-xl text-truncate text-truncate-lg text-info"
+                                           data-toggle="dropdown" aria-expanded="false">
+                                            {{$user->username}}
+                                            <i class="fal fas fa-cog fa-fw d-inline-block ml-1 fs-md"></i>
+                                            <i class="fal fa-angle-down d-inline-block ml-1 fs-md"></i>
                                         </a>
-                                        <a href="/delete/{{$user->id}}" class="dropdown-item" onclick="return confirm('Are you sure?');">
-                                            <i class="fa fa-window-close"></i>
-                                            Удалить
-                                        </a>
-                                    </div>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="/edit{{$user->id}}">
+                                                <i class="fa fa-edit"></i>
+                                                Редактировать</a>
+                                            <a class="dropdown-item" href="/security{{$user->id}}">
+                                                <i class="fa fa-lock"></i>
+                                                Безопасность</a>
+                                            <a class="dropdown-item" href="/status{{$user->id}}">
+                                                <i class="fa fa-sun"></i>
+                                                Установить статус</a>
+                                            <a class="dropdown-item" href="/media{{$user->id}}">
+                                                <i class="fa fa-camera"></i>
+                                                Загрузить аватар
+                                            </a>
+                                            <a href="/delete/{{$user->id}}" class="dropdown-item"
+                                               onclick="return confirm('Are you sure?');">
+                                                <i class="fa fa-window-close"></i>
+                                                Удалить
+                                            </a>
+                                        </div>
 
                                     @else
                                         {{$user->username}}
@@ -118,21 +121,22 @@
                 </div>
             @endforeach
         </div>
-    </main>
-    {{$users->links()}}
-@endsection
+        <div class="mt-3">
+            {{ $users->links() }}
+        </div>
+        @endsection
 
 
-@section('footer')
-    <footer class="page-footer" role="contentinfo">
-        <div class="d-flex align-items-center flex-1 text-muted">
-            <span class="hidden-md-down fw-700">2022 © Учебный проект</span>
-        </div>
-        <div>
-            <ul class="list-table m-0">
-                <li><a href="#" class="text-secondary fw-700">Home</a></li>
-                <li class="pl-3"><a href="#" class="text-secondary fw-700">About</a></li>
-            </ul>
-        </div>
-    </footer>
+        @section('footer')
+            <footer class="page-footer" role="contentinfo">
+                <div class="d-flex align-items-center flex-1 text-muted">
+                    <span class="hidden-md-down fw-700">2022 © Учебный проект</span>
+                </div>
+                <div>
+                    <ul class="list-table m-0">
+                        <li><a href="#" class="text-secondary fw-700">Home</a></li>
+                        <li class="pl-3"><a href="#" class="text-secondary fw-700">About</a></li>
+                    </ul>
+                </div>
+            </footer>
 @endsection

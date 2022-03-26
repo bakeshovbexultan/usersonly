@@ -19,29 +19,19 @@ use Illuminate\Database\Seeder;
 class ExampleTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * TODO: Как документировать и нужно ли документировать тестирование
-     */
 
-    public function test_the_application_returns_a_successful_response()
-    {
-        $this->assertTrue(true);
-
-//        $user = User::factory()->create();
-//        $response = $this->get('/');
-//        $response->assertStatus(200);
-//        $response = $this->get('/');
-    }
-    
     public function test_a_users_view_can_be_rendered()
     {
         User::factory(20)->create();
         $users = User::paginate(9);
         $user = $users->first();
+
         Auth::loginUsingId($user->id);
 
         $view = $this->view('users', ['users' => $users]);
+        $response = $this->get('/users');
 
+        $response->assertStatus(200);
         $view->assertSee('Учебный проект');
         $view->assertSee('Войти');
         $view->assertSee('Список пользователей');
@@ -50,12 +40,9 @@ class ExampleTest extends TestCase
     }
 
     /**
-     * Рендер страницы users
-     * Проверить работает ли кнопка "Добавить" нового пользователя, если данный пользователь админ,
-     * если не админ то не показывается ли
+     * TODO: Перейти по ссылке кнопки и подтвердить что вид работает
      */
-
-    public function test_admin_has_add_user_button()
+    public function test_admin_has_add_user_button_and_it_is_work()
     {
         User::factory(1)->create([
             'id' => 1,
@@ -69,21 +56,39 @@ class ExampleTest extends TestCase
         ]);
 
         Auth::loginUsingId(1);
-//        browse(function ($browser) {
-//            $browser->loginAs(User::find(1))
-//                ->visit('/home');
-//        });
+        $users = User::paginate(9);
+        $view = $this->view('users', ['users' => $users]);
+        $response = $this->get('/users');
+
+        $response->assertStatus(200);
+        $view->assertSee('Учебный проект');
+        $view->assertSee('Добавить');
+    }
+
+    public function test_user_has_not_add_user_button()
+    {
+        User::factory(1)->create([
+            'id' => 1,
+            'username' => 'John Vance',
+            'email' => 'johnvance@example.com',
+            'profession' => 'Doctor',
+            'phone_number' => '+1 (970) 357-9097',
+            'address' => '431 Eveline Trail Apt. 085 Tessside, RI 16481-3261',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', //password
+            'role' => 'user',
+        ]);
+
+        Auth::loginUsingId(1);
 
         $users = User::paginate(9);
 
         $view = $this->view('users', ['users' => $users]);
 
+        $response = $this->get('/users');
+        $response->assertStatus(200);
         $view->assertSee('Учебный проект');
+        $view->assertDontSee('Добавить');
     }
-    /**
-     * Создать пользователя в методе, отправить его на страницу users и проверить
-     * показывается ли он там
-     */
 
     public function test_a_users_view_can_show_user_data()
     {
@@ -109,6 +114,20 @@ class ExampleTest extends TestCase
         $view->assertSee('+1 (970) 357-9097');
         $view->assertSee('431 Eveline Trail Apt. 085 Tessside, RI 16481-3261');
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Рендер страницы users
@@ -225,9 +244,6 @@ class ExampleTest extends TestCase
      * Удаление
      */
 
-    /**
-     * Регистрация
-     */
 
     /**
      * Вход
