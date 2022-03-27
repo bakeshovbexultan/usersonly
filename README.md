@@ -1,4 +1,4 @@
-# Educational Project on Laravel
+# Practical project on Laravel
 Website, where it is possible to store and edit users
 
 I developed a website to practice laravel. Implemented such functions as:
