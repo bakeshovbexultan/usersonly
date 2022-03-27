@@ -13,13 +13,7 @@ class ExampleTest extends TestCase
         parent::setUp();
     }
 
-    public function test_that_true_is_true()
-    {
-        $this->assertTrue(true);
-    }
-
-
-    public function testUserCreate()
+    public function test_user_can_be_created()
     {
         /*$data = [
             'id' => 99999999,
@@ -28,8 +22,6 @@ class ExampleTest extends TestCase
         ];
 
         $response = User::create($data);
-
-
 
         $this->assertDatabaseHas('users', [
             'email' => $data['email'],
