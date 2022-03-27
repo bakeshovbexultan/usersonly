@@ -22,4 +22,4 @@ Main page:
 Link to demo: #
 
 php version: 8.0
-laravel version: 9.5.1!
+laravel version: 9.5.1
