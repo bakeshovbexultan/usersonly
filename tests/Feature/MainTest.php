@@ -17,7 +17,7 @@ use Laravel\Dusk\Browser;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ExampleTest extends TestCase
+class MainTest extends TestCase
 {
     use RefreshDatabase;
 
