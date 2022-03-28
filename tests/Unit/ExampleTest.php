@@ -3,8 +3,20 @@
 namespace Tests\Unit;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use PHPUnit\Framework\TestCase;
 use Illuminate\Support\Str;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Models\Status;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Laravel\Dusk\Chrome;
+use Tests\DuskTestCase;
+use Illuminate\Support\ServiceProvider;
+use Laravel\Dusk\Browser;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
 
 class ExampleTest extends TestCase
 {

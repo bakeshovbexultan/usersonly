@@ -217,7 +217,7 @@ class ExampleTest extends TestCase
 
     public function test_a_media_view_can_be_rendered()
     {
-        $user = User::factory(1)->create([
+        $user = User::factory(1)->make([
             'id' => 1,
             'username' => 'John Vance',
             'email' => 'johnvance@example.com',
@@ -246,7 +246,7 @@ class ExampleTest extends TestCase
 
     public function test_a_page_profile_view_can_be_rendered()
     {
-        $user = User::factory(1)->create([
+        $user = User::factory(1)->make([
             'id' => 1,
             'username' => 'John Vance',
             'email' => 'johnvance@example.com',
@@ -279,7 +279,7 @@ class ExampleTest extends TestCase
 
     public function test_a_security_view_can_be_rendered()
     {
-        $user = User::factory(1)->create([
+        $user = User::factory(1)->make([
             'id' => 1,
             'username' => 'John Vance',
             'email' => 'johnvance@example.com',
@@ -305,7 +305,7 @@ class ExampleTest extends TestCase
 
     public function test_a_status_view_can_be_rendered()
     {
-        $user = User::factory(1)->create([
+        $user = User::factory(1)->make([
             'id' => 1,
             'username' => 'John Vance',
             'email' => 'johnvance@example.com',
@@ -316,7 +316,7 @@ class ExampleTest extends TestCase
             'role' => 'user',
             'avatar' => null,
         ])->first();
-        $statuses = Status::factory(1)->create(['status_condition' => 'Online']);
+        $statuses = Status::factory(1)->make(['status_condition' => 'Online']);
 
         Auth::loginUsingId(1);
         $this->withViewErrors([]);
@@ -355,7 +355,7 @@ class ExampleTest extends TestCase
      */
     public function test_a_user_can_be_deleted()
     {
-        User::factory(1)->create([
+        User::factory(1)->make([
             'id' => 1,
             'username' => 'John Vance',
             'email' => 'johnvance@example.com',
@@ -374,7 +374,7 @@ class ExampleTest extends TestCase
 
     public function test_a_login_view_can_be_rendered()
     {
-        User::factory(1)->create([
+        User::factory(1)->make([
             'id' => 1,
             'username' => 'John Vance',
             'email' => 'johnvance@example.com',
@@ -396,7 +396,7 @@ class ExampleTest extends TestCase
 
     public function test_a_register_view_can_be_rendered()
     {
-        User::factory(1)->create([
+        User::factory(1)->make([
             'id' => 1,
             'username' => 'John Vance',
             'email' => 'johnvance@example.com',
