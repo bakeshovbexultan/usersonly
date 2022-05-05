@@ -2,9 +2,9 @@
 
 namespace Tests\Unit;
 
+use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use PHPUnit\Framework\TestCase;
 use Illuminate\Support\Str;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\Status;
@@ -27,17 +27,47 @@ class MainTest extends TestCase
 
     public function test_user_can_be_created()
     {
-        /*$data = [
-            'id' => 99999999,
-            'email' => Str::random(4) . '@example.com',
-            'password' => '123123123',
-        ];
-
-        $response = User::create($data);
-
+        User::factory(1)->create([
+            'id' => 1,
+            'username' => 'John Vance',
+            'email' => 'johnvance@example.com',
+            'profession' => 'Doctor',
+            'phone_number' => '+1 (970) 357-9097',
+            'address' => '431 Eveline Trail Apt. 085 Tessside, RI 16481-3261',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', //password
+            'role' => 'user',
+        ]);
         $this->assertDatabaseHas('users', [
-            'email' => $data['email'],
-        ])->assertIsBool($response);*/
-        self::assertTrue(true);
+            'username' => 'John Vance',
+            'email' => 'johnvance@example.com',
+            'profession' => 'Doctor',
+            'phone_number' => '+1 (970) 357-9097',
+            'address' => '431 Eveline Trail Apt. 085 Tessside, RI 16481-3261',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', //password
+            'role' => 'user',
+        ]);
     }
+
+//    public function test_user_can_be_deleted()
+//    {
+//        User::factory(1)->create([
+//            'id' => 1,
+//            'username' => 'John Vance',
+//            'email' => 'johnvance@example.com',
+//            'profession' => 'Doctor',
+//            'phone_number' => '+1 (970) 357-9097',
+//            'address' => '431 Eveline Trail Apt. 085 Tessside, RI 16481-3261',
+//            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', //password
+//            'role' => 'user',
+//        ]);
+//        $this->assertDatabaseHas('users', [
+//            'username' => 'John Vance',
+//            'email' => 'johnvance@example.com',
+//            'profession' => 'Doctor',
+//            'phone_number' => '+1 (970) 357-9097',
+//            'address' => '431 Eveline Trail Apt. 085 Tessside, RI 16481-3261',
+//            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', //password
+//            'role' => 'user',
+//        ]);
+//    }
 }

@@ -21,6 +21,42 @@ class MainTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_user_can_not_see_registration_page_when_he_is_authenticated()
+    {
+        $user = User::factory(1)->create([
+            'id' => 1,
+            'username' => 'John Vance',
+            'email' => 'johnvance@example.com',
+            'profession' => 'Doctor',
+            'phone_number' => '+1 (970) 357-9097',
+            'address' => '431 Eveline Trail Apt. 085 Tessside, RI 16481-3261',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', //password
+            'role' => 'user',
+            'avatar' => null,
+        ])->first();
+        Auth::loginUsingId($user->id);
+        $response = $this->get('register');
+        $response->assertRedirect('/users');
+    }
+
+    public function test_user_can_not_see_login_page_when_he_is_authenticated()
+    {
+        $user = User::factory(1)->create([
+            'id' => 1,
+            'username' => 'John Vance',
+            'email' => 'johnvance@example.com',
+            'profession' => 'Doctor',
+            'phone_number' => '+1 (970) 357-9097',
+            'address' => '431 Eveline Trail Apt. 085 Tessside, RI 16481-3261',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', //password
+            'role' => 'user',
+            'avatar' => null,
+        ])->first();
+        Auth::loginUsingId($user->id);
+        $response = $this->get('login');
+        $response->assertRedirect('/users');
+    }
+
     public function test_a_users_view_can_be_rendered()
     {
         User::factory(20)->create();
