@@ -1,25 +1,24 @@
-# Practical project on Laravel
-Website, where it is possible to store and edit users
+# Проект на Laravel
+Сайт, на котором можно хранить и редактировать пользователей
 
-I developed a website to practice laravel. Implemented such functions as:
-- Creating users
-- Registration
-- Deleting users
-- Authorization
-- Migrations
-- Testing
-- Views
+Реализованы такие функции как:
+- Создание пользователей
+- Изменение данных пользователя
+- Регистрация, авторизация
+- Удаление пользователей
+- Миграции
+- Тестирование
 - Pagination
 - Faker
 
-Changing the:
-- Status, avatar, email, password and other user data
+Изменение:
+- Статус, аватар, электронная почта, пароль и другие данные пользователя
 
-Main page:
+Главная страница:
 
 ![main](https://user-images.githubusercontent.com/62174299/160285071-48b5c002-0b05-480e-952d-ac08b863b4c2.png)
 
-Link to demo: #
+Ссылка на сайт: https://usersonly.beksultan.site
 
 php version: 8.0
 laravel version: 9.5.1
