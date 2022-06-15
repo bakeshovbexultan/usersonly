@@ -17,7 +17,7 @@
                 {{session('status')}}
             </div>
         @endif
-        <form action="editUserSecurity{{$editUser->id}}" method="POST">
+        <form action="/editUserSecurity/{{$editUser->id}}" method="POST">
             @csrf
             <div class="row">
                 <div class="col-xl-6">
@@ -51,7 +51,7 @@
                                     <input type="password" id="simpleinput" class="form-control @error('password') is-invalid @enderror">
                                 </div>
                                 @error('password')
-                                <div class="alert alert-danger">{{ $message }}</div>
+                                    <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
 
 
@@ -66,4 +66,4 @@
             </div>
         </form>
     </main>
-    @endsection
+@endsection

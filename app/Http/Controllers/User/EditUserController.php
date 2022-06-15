@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\User\BaseController;
-use App\Http\Controllers\Controller;
-use App\Services\Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -25,7 +22,7 @@ class EditUserController extends BaseController
         $filename = $request->avatar->store('uploads');
         $data = ['avatar' => $filename];
         $this->helper->updateInDB($data, $id);
-        return redirect('/page_profile' . $user->id)->with('status', 'Профиль успешно обновлен');
+        return redirect('/page_profile/' . $user->id)->with('status', 'Профиль успешно обновлен');
     }
 
     function delete($id)
@@ -47,7 +44,7 @@ class EditUserController extends BaseController
         ];
         $this->helper->updateInDB($data, $id);
 
-        return redirect('/page_profile' . $id)->with('status', 'Профиль успешно обновлен');
+        return redirect('/page_profile/' . $id)->with('status', 'Профиль успешно обновлен');
     }
 
     function editUserSecurity($id, Request $request)
@@ -64,7 +61,7 @@ class EditUserController extends BaseController
         ];
         $this->helper->updateInDB($data, $id);
 
-        return redirect('/page_profile' . $id)->with('status', 'Профиль успешно обновлен');
+        return redirect('/page_profile/' . $id)->with('status', 'Профиль успешно обновлен');
     }
 
     public function editUserStatus($id)
@@ -73,6 +70,6 @@ class EditUserController extends BaseController
             'status_id' => $_POST['status']
         ];
         $this->helper->updateInDB($data, $id);
-        return redirect('page_profile' . $id)->with('status-success', 'Профиль успешно обновлен');
+        return redirect('page_profile/' . $id)->with('status-success', 'Профиль успешно обновлен');
     }
 }

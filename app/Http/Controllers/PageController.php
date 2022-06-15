@@ -13,25 +13,34 @@ class PageController extends Controller
         $this->helper = new Helper;
     }
 
-    function index() {
+    public function index() {
         $users = User::paginate(9);
 
         return view('users', ['users' => $users]);
     }
 
-    function page_profile($id) {
+    public function edit($id) {
+        $this->helper->userAdminOrSelfprofile($id);
+
+        $editUser = $this->helper->getUserById($id);
+        return view('edit', ['editUser' => $editUser]);
+    }
+
+    public function page_profile($id) {
         $user = $this->helper->getUserById($id);
         return view('page_profile', ['user' => $user]);
     }
 
     function media($id) {
         $this->helper->userAdminOrSelfprofile($id);
+
         $user = $this->helper->getUserById($id);
         return view('media', ['user' => $user]);
     }
 
     function status($id) {
         $this->helper->userAdminOrSelfprofile($id);
+
         $statuses = $this->helper->getAllStatuses();
         $user = $this->helper->getUserById($id);
         return view('status', ['statuses' => $statuses, 'user' => $user]);
@@ -39,13 +48,8 @@ class PageController extends Controller
 
     function security($id) {
         $this->helper->userAdminOrSelfprofile($id);
+
         $editUser = $this->helper->getUserById($id);
         return view('security', ['editUser' => $editUser]);
-    }
-
-    function edit($id) {
-        $this->helper->userAdminOrSelfprofile($id);
-        $editUser = $this->helper->getUserById($id);
-        return view('edit', ['editUser' => $editUser]);
     }
 }

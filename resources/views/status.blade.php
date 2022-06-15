@@ -7,7 +7,7 @@
                 <i class='subheader-icon fal fa-sun'></i> Установить статус
             </h1>
         </div>
-        <form action="editUserStatus{{$user->id}}" method="POST">
+        <form action="/editUserStatus/{{$user->id}}" method="POST">
             @csrf
             <div class="row">
                 <div class="col-xl-6">
@@ -25,7 +25,7 @@
 
                                             <select name="status" class="form-control" id="example-select">
                                                 @foreach($statuses as $status)
-                                                <option value="{{$status->id}}" <?php if ($user->status_id == $status->id) { echo ' selected'; } ?>>{{$status->status_condition}}</option>
+                                                    <option value="{{$status->id}}" @if($user->status_id == $status->id) selected @endif>{{$status->status_condition}}</option>
                                                 @endforeach
                                             </select>
 
@@ -43,4 +43,4 @@
             </div>
         </form>
     </main>
-    @endsection
+@endsection

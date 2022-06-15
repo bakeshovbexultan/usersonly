@@ -7,7 +7,7 @@
                 <i class='subheader-icon fal fa-plus-circle'></i> Редактировать
             </h1>
         </div>
-        <form action="editUserData{{$editUser->id}}" method="POST">
+        <form action="/editUserData/{{$editUser->id}}" method="POST">
             @csrf
             <div class="row">
                 <div class="col-xl-6">

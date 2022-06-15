@@ -13,8 +13,8 @@
                 {{session('status-danger')}}
             </div>
         @endif
-        <form action="/updateAvatar{{$user->id}}" method="POST" enctype="multipart/form-data">
-            {{csrf_field()}}
+        <form action="/updateAvatar/{{$user->id}}" method="POST" enctype="multipart/form-data">
+            @csrf
             <div class="row">
                 <div class="col-xl-6">
                     <div id="panel-1" class="panel">
@@ -24,7 +24,7 @@
                             </div>
                             <div class="panel-content">
                                 <div class="form-group">
-                                    <img src="<?php echo $user->avatar ?? 'uploads/plug/plug.jpg'; ?>" alt="" class="img-responsive" width="200">
+                                    <img src="@if(!empty($user->avatar)) {{asset($user->avatar)}} @else {{asset('uploads/plug/plug.jpg')}} @endif" alt="Аватар пользователя" class="img-responsive" width="200">
                                 </div>
 
                                 <div class="form-group">

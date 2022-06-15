@@ -19,12 +19,14 @@
         </div>
         <div class="row">
             <div class="col-xl-12">
-                @if(Auth::user()->role == 'admin')
-                    <a class="btn btn-success" href="/create_user">Добавить</a>
-                @endif
+                @auth
+                    @if(Auth::user()->role == 'admin')
+                        <a class="btn btn-success" href="/create_user">Добавить</a>
+                    @endif
+                @endauth
                 <div class="border-faded bg-faded p-3 mb-g d-flex mt-3">
-                    <input type="text" id="js-filter-contacts" name="filter-contacts"
-                           class="form-control shadow-inset-2 form-control-lg" placeholder="Найти пользователя">
+                    <label for="js-filter-contacts"></label><input type="text" id="js-filter-contacts" name="filter-contacts"
+                                                                   class="form-control shadow-inset-2 form-control-lg" placeholder="Найти пользователя">
                     <div class="btn-group btn-group-lg btn-group-toggle hidden-lg-down ml-3" data-toggle="buttons">
                         <label class="btn btn-default active">
                             <input type="radio" name="contactview" id="grid" checked="" value="grid"><i
@@ -50,7 +52,8 @@
                                           style="background-image:url({{$user->avatar}}); background-size: cover;"></span>
                                 </span>
                                 <div class="info-card-text flex-1">
-                                    @if(Auth::user()->role == 'admin' || Auth::id() == $user->id)
+                                    @auth
+                                        @if(Auth::user()->role == 'admin' || Auth::id() == $user->id)
 
                                         <a href="javascript:void(0);"
                                            class="fs-xl text-truncate text-truncate-lg text-info"
@@ -60,16 +63,16 @@
                                             <i class="fal fa-angle-down d-inline-block ml-1 fs-md"></i>
                                         </a>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="/edit{{$user->id}}">
+                                            <a class="dropdown-item" href="/edit/{{$user->id}}">
                                                 <i class="fa fa-edit"></i>
                                                 Редактировать</a>
-                                            <a class="dropdown-item" href="/security{{$user->id}}">
+                                            <a class="dropdown-item" href="/security/{{$user->id}}">
                                                 <i class="fa fa-lock"></i>
                                                 Безопасность</a>
-                                            <a class="dropdown-item" href="/status{{$user->id}}">
+                                            <a class="dropdown-item" href="/status/{{$user->id}}">
                                                 <i class="fa fa-sun"></i>
                                                 Установить статус</a>
-                                            <a class="dropdown-item" href="/media{{$user->id}}">
+                                            <a class="dropdown-item" href="/media/{{$user->id}}">
                                                 <i class="fa fa-camera"></i>
                                                 Загрузить аватар
                                             </a>
@@ -81,6 +84,11 @@
                                         </div>
 
                                     @else
+                                        {{$user->username}}
+                                    @endif
+                                    @endauth
+
+                                    @if(!Auth::check())
                                         {{$user->username}}
                                     @endif
 
@@ -124,19 +132,20 @@
         <div class="mt-3">
             {{ $users->links() }}
         </div>
-        @endsection
+    </main>
+@endsection
 
 
-        @section('footer')
-            <footer class="page-footer" role="contentinfo">
-                <div class="d-flex align-items-center flex-1 text-muted">
-                    <span class="hidden-md-down fw-700">2022 © Учебный проект</span>
-                </div>
-                <div>
-                    <ul class="list-table m-0">
-                        <li><a href="#" class="text-secondary fw-700">Home</a></li>
-                        <li class="pl-3"><a href="#" class="text-secondary fw-700">About</a></li>
-                    </ul>
-                </div>
-            </footer>
+@section('footer')
+    <footer class="page-footer" role="contentinfo">
+        <div class="d-flex align-items-center flex-1 text-muted">
+            <span class="hidden-md-down fw-700">2022 © Учебный проект</span>
+        </div>
+        <div>
+            <ul class="list-table m-0">
+                <li><a href="#" class="text-secondary fw-700">Home</a></li>
+                <li class="pl-3"><a href="#" class="text-secondary fw-700">About</a></li>
+            </ul>
+        </div>
+    </footer>
 @endsection
