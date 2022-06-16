@@ -1,5 +1,6 @@
 # Проект на Laravel
 Сайт, на котором можно хранить и редактировать пользователей
+Ссылка: https://usersonly.beksultan.site
 
 Реализованы такие функции как:
 - Создание пользователей
@@ -17,8 +18,6 @@
 Главная страница:
 
 ![main](https://user-images.githubusercontent.com/62174299/160285071-48b5c002-0b05-480e-952d-ac08b863b4c2.png)
-
-Ссылка на сайт: https://usersonly.beksultan.site
 
 php version: 8.0
 laravel version: 9.5.1
